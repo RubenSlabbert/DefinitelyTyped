@@ -58,7 +58,7 @@ declare module "express-session" {
       unset?: string;
     }
 
-	export interface BaseMemoryStore {
+    export interface BaseMemoryStore {
       get: (sid: string, callback: (err: any, session: Express.Session) => void) => void;
       set: (sid: string, session: Express.Session, callback: (err: any) => void) => void;
       destroy: (sid: string, callback: (err: any) => void) => void;
@@ -67,18 +67,19 @@ declare module "express-session" {
     }
 
     export abstract class Store extends node.EventEmitter {
-	  constructor(config?: any);
+      constructor(config?: any);
 
-	  regenerate (req: express.Request, fn: (err: any) => any): void;
-      load (sid: string, fn: (err: any, session: Express.Session) => any): void;
-      createSession (req: express.Request, sess: Express.Session): void;
-      
+      regenerate(req: express.Request, fn: (err: any) => any): void;
+      load(sid: string, fn: (err: any, session: Express.Session) => any): void;
+      createSession(req: express.Request, sess: Express.Session): void;
+
       get: (sid: string, callback: (err: any, session: Express.Session) => void) => void;
       set: (sid: string, session: Express.Session, callback: (err: any) => void) => void;
       destroy: (sid: string, callback: (err: any) => void) => void;
-      all: (callback: (err: any, obj: { [sid: string]: Express.Session; }) => void) => void;
-      length: (callback: (err: any, length: number) => void) => void;
-      clear: (callback: (err: any) => void) => void;
+      all?: (callback: (err: any, obj: { [sid: string]: Express.Session; }) => void) => void;
+      length?: (callback: (err: any, length: number) => void) => void;
+      clear?: (callback: (err: any) => void) => void;
+      touch?: (sid: string, session: Express.Session, callback: (err: any) => void) => void;
     }
 
     export class MemoryStore implements BaseMemoryStore {
